@@ -3,6 +3,7 @@ class Autosave extends React.Component
     constructor(props) {
         super(props);
         this.state = {
+            autoSaveInForward: Number(props.autoSaveIn),
             autoSaveIn: Number(props.autoSaveIn),
         }
     }
@@ -24,7 +25,7 @@ class Autosave extends React.Component
     onUpdateAutoSave() {
         this.setState(prevState => {
 
-            let autoSaveIn = 60;
+            let autoSaveIn = this.state.autoSaveInForward;
             if (prevState.autoSaveIn > 1) {
                 autoSaveIn = prevState.autoSaveIn - 1;
             }
@@ -38,6 +39,7 @@ class Autosave extends React.Component
     componentWillReceiveProps(nextProps) {
         if (nextProps.autoSaveIn != this.state.autoSaveIn) {
             this.setState({
+                autoSaveInForward: nextProps.autoSaveIn,
                 autoSaveIn: nextProps.autoSaveIn
             })
         }

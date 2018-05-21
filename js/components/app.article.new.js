@@ -31,16 +31,18 @@ class ArticleNew extends React.Component {
                         </form>
                     </div>
                     <div className="col-md-6">
-                        <div>
-                            <div className="card mr-5 mb-5" style={{width: '30rem', float: 'left'}}>
-                                <div className="card-body">
-                                    <h5 className="card-title">{this.state.title}</h5>
-                                    <h6 className="card-subtitle mb-2 text-muted">{this.state.subtitle}</h6>
-                                    <p className="card-text">{this.state.content}</p>
-                                    <Autosave autoSaveIn="60"/>
+                        {this.state.title && this.state.subtitle && this.state.content &&
+                            <div>
+                                <div className="card mr-5 mb-5" style={{width: '30rem', float: 'left'}}>
+                                    <div className="card-body">
+                                        <h5 className="card-title">{this.state.title}</h5>
+                                        <h6 className="card-subtitle mb-2 text-muted">{this.state.subtitle}</h6>
+                                        <p className="card-text">{this.state.content}</p>
+                                        <Autosave autoSaveIn={this.state.autoSaveInForward}/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -63,7 +65,7 @@ class ArticleNew extends React.Component {
 
     onSubmit(event) {
         event.preventDefault();
-        this.setState({autoSaveInForward:60});
+        this.setState({autoSaveInForward:120});
     }
 
 }
