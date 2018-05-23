@@ -33,13 +33,14 @@ class Articles extends React.Component
 
     onFilterArticles(event) {
         event.preventDefault();
-
         const text = event.currentTarget.value;
-        const filteredArticles = this.getFilteredArticlesForText(text);
+        this.getFilteredArticlesForText(text).then(filteredArticles => {
+            this.setState({
+                filteredArticles: filteredArticles
+            })
+        });
 
-        this.setState({
-            filteredArticles: filteredArticles
-        })
+
     }
 
     onToggleShowAdd(event) {
@@ -52,6 +53,12 @@ class Articles extends React.Component
     }
 
     getFilteredArticlesForText(text) {
-        return load().filter(article => article.title.toLowerCase().includes(text.toLowerCase()))
+        return new Promise(resolve => {
+            const time = (Math.random() + 1) * 250;
+            setTimeout(() => {
+                const filteredAtricles = load().filter(article => article.title.toLowerCase().includes(text.toLowerCase()));
+                resolve(filteredAtricles);
+            }, time)
+        });
     }
 }
